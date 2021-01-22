@@ -39,10 +39,10 @@ class UsuarioService {
         }
       }
 
-      prefs.registerAccessToken(accessTokenModel.accessToken);
+      await prefs.registerAccessToken(accessTokenModel.accessToken);
 
       final confirmModel = await _repository.confirmLogin();
-      prefs.registerAccessToken(confirmModel.accessToken);
+      await prefs.registerAccessToken(confirmModel.accessToken);
       SecurityStorageRepository()
           .registerRefreshToken(confirmModel.refreshToken);
       final dadosUsuario = await _repository.recuperarDadosUsuarioLogado();

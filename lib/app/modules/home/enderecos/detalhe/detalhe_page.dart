@@ -65,7 +65,7 @@ class _DetalhePageState extends ModularState<DetalhePage, DetalheController> {
                     labelText: 'Endereço',
                     suffixIcon: IconButton(
                       icon: Icon(Icons.edit),
-                      onPressed: () {},
+                      onPressed: () => Modular.to.pop(model),
                     )),
               ),
               TextFormField(

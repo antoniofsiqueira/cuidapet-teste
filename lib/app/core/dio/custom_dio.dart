@@ -11,7 +11,7 @@ class CustomDio {
   BaseOptions options = BaseOptions(
     baseUrl: DotEnv().env['base_url'],
     connectTimeout: int.parse(DotEnv().env['dio_connectTimeout']),
-    receiveTimeout: int.parse(DotEnv().env['dio_connectTimeout']),
+    receiveTimeout: int.parse(DotEnv().env['dio_receiveTimeout']),
   );
   CustomDio._() {
     _dio = Dio(options);

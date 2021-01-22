@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class EnderecoModel {
   int id;
   String endereco;
@@ -16,11 +18,14 @@ class EnderecoModel {
     if (map != null) {
       id = map[id] as int;
       endereco = map['endereco'] as String;
-      //latitude = map['latidude'].runtimeType == String ? double.tryParse(map['latitude']) : double.parse(map['latitude']);
-      //latitude = map['latidude'].runtimeType == String ? double.parse(map['latitude']) : map['latitude'] as double;
-      //longitude = map['longitude'].runtimeType == String ? double.parse(map['longitude']) : map['longitude'] as double;
-      //longitude = map['longitude'].runtimeType == String ? double.parse(map['longitude']) : map['longitude'] as double;
-      if (map['latitude'].runtimeType == String) {
+
+      latitude = map['latitude'].runtimeType == String
+          ? double.parse(map['latitude'])
+          : map['latitude'] as double;
+      longitude = map['longitude'].runtimeType == String
+          ? double.parse(map['longitude'])
+          : map['longitude'] as double;
+      /*  if (map['latitude'].runtimeType == String) {
         double.parse(map['latitude']);
       } else {
         map['latitude'] as double;
@@ -29,9 +34,24 @@ class EnderecoModel {
         double.parse(map['latitude']);
       } else {
         map['longitude'] as double;
-      }
+      }*/
 
       complemento = map['complemento'] as String;
     }
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'endereco': endereco,
+      'latitude': latitude,
+      'longitude': longitude,
+      'complemento': complemento,
+    };
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory EnderecoModel.fromJson(String source) =>
+      EnderecoModel.fromMap(json.decode(source));
 }

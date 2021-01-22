@@ -1,4 +1,21 @@
 {
     "git.ignoreLimitWarning": true,
-    "dart.analysisExcludedFolders":["./iwfpapp/lib/generated_plugin_registrant.dart"]
+    "dart.analysisExcludedFolders": [
+        "./iwfpapp/lib/generated_plugin_registrant.dart"
+    ],
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "CuidaPet_Api",
+            "database": "cuidapet_db",
+            "username": "cuidapet",
+            "password": "cuidapet"
+        }
+    ]
 }

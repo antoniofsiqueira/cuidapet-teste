@@ -25,6 +25,56 @@ mixin _$EnderecosController on _EnderecosControllerBase, Store {
     });
   }
 
+  final _$enviarDetalheAsyncAction =
+      AsyncAction('_EnderecosControllerBase.enviarDetalhe');
+
+  @override
+  Future<void> enviarDetalhe(Prediction pred) {
+    return _$enviarDetalheAsyncAction.run(() => super.enviarDetalhe(pred));
+  }
+
+  final _$minhaLocalizacaoAsyncAction =
+      AsyncAction('_EnderecosControllerBase.minhaLocalizacao');
+
+  @override
+  Future<void> minhaLocalizacao() {
+    return _$minhaLocalizacaoAsyncAction.run(() => super.minhaLocalizacao());
+  }
+
+  final _$selecionarEnderecoAsyncAction =
+      AsyncAction('_EnderecosControllerBase.selecionarEndereco');
+
+  @override
+  Future<void> selecionarEndereco(EnderecoModel model) {
+    return _$selecionarEnderecoAsyncAction
+        .run(() => super.selecionarEndereco(model));
+  }
+
+  final _$_EnderecosControllerBaseActionController =
+      ActionController(name: '_EnderecosControllerBase');
+
+  @override
+  void verificaEdicaoEndereco(EnderecoModel enderecoEdicao) {
+    final _$actionInfo = _$_EnderecosControllerBaseActionController.startAction(
+        name: '_EnderecosControllerBase.verificaEdicaoEndereco');
+    try {
+      return super.verificaEdicaoEndereco(enderecoEdicao);
+    } finally {
+      _$_EnderecosControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void buscarEnderecosCadastrados() {
+    final _$actionInfo = _$_EnderecosControllerBaseActionController.startAction(
+        name: '_EnderecosControllerBase.buscarEnderecosCadastrados');
+    try {
+      return super.buscarEnderecosCadastrados();
+    } finally {
+      _$_EnderecosControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

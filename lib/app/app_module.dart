@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:cuidape_curso/app/app_widget.dart';
 
 import 'modules/login/login_module.dart';
+import 'repository/fornecedor_repository.dart';
+import 'services/fornecedor_service.dart';
 
 class AppModule extends MainModule {
   @override
@@ -22,6 +24,8 @@ class AppModule extends MainModule {
         Bind((i) => UsuarioService(i.get())),
         Bind((i) => EnderecoRepository()),
         Bind((i) => EnderecoService(i.get())),
+        Bind((i) => FornecedorRepository()),
+        Bind((i) => FornecedorService(i.get())),
         Bind((i) => AuthStore()),
       ];
 

@@ -31,4 +31,10 @@ class EnderecoRepository {
     var response = await places.autocomplete(endereco, language: 'pt');
     return response.predictions;
   }
+
+  Future<PlacesDetailsResponse> recuperarDetalhesEnderecoGooglePlaces(
+      String placeId) {
+    final places = GoogleMapsPlaces(apiKey: DotEnv().env['googleApiKey']);
+    return places.getDetailsByPlaceId(placeId);
+  }
 }

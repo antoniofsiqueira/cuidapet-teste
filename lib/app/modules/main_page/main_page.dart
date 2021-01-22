@@ -20,8 +20,8 @@ class _MainPageState extends State<MainPage> {
         await authStore.loadUsuario();
         Modular.to.pushNamedAndRemoveUntil('/home', (_) => false);
       } else {
-        //Modular.to.pushNamedAndRemoveUntil('/login', (_) => false);
-        Modular.to.pushNamedAndRemoveUntil('/home', (_) => false);
+        Modular.to.pushNamedAndRemoveUntil('/login', (_) => false);
+        //Modular.to.pushNamedAndRemoveUntil('/home', (_) => false);
       }
     });
     super.initState();
