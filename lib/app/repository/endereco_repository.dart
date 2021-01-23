@@ -26,7 +26,7 @@ class EnderecoRepository {
     await conn.rawDelete('delete from endereco');
   }
 
-  Future<List<Prediction>> buscaEnderecoGooglePlaces(String endereco) async {
+  Future<List<Prediction>> buscarEnderecoGooglePlaces(String endereco) async {
     final places = GoogleMapsPlaces(apiKey: DotEnv().env['googleApiKey']);
     var response = await places.autocomplete(endereco, language: 'pt');
     return response.predictions;

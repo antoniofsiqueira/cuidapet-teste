@@ -4,17 +4,15 @@ import 'package:google_maps_webservice/places.dart';
 
 class EnderecoService {
   final EnderecoRepository _repository;
-  EnderecoService(
-    this._repository,
-  );
+  EnderecoService(this._repository);
 
   Future<bool> existeEnderecoCadastrado() async {
     var listaEnderecos = await _repository.buscarEnderecos();
     return listaEnderecos.isNotEmpty;
   }
 
-  Future<List<Prediction>> buscaEnderecoGooglePlaces(String endereco) async {
-    return await _repository.buscaEnderecoGooglePlaces(endereco);
+  Future<List<Prediction>> buscarEnderecoGooglePlaces(String endereco) async {
+    return await _repository.buscarEnderecoGooglePlaces(endereco);
   }
 
   Future<void> salvarEndereco(EnderecoModel endereco) async {
@@ -25,7 +23,7 @@ class EnderecoService {
     return _repository.buscarEnderecos();
   }
 
-  Future<PlacesDetailsResponse> buscaDetalheEnderecoGooglePlaces(
+  Future<PlacesDetailsResponse> buscarDetalheEnderecoGooglePlaces(
       String placeId) {
     return _repository.recuperarDetalhesEnderecoGooglePlaces(placeId);
   }

@@ -165,6 +165,7 @@ class _EnderecosPageState
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: ListTile(
+        onTap: () => controller.selecionarEndereco(model),
         leading: CircleAvatar(
           radius: 30,
           backgroundColor: Colors.white,

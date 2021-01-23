@@ -26,7 +26,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     'V': Icons.local_hospital,
     'C': Icons.store_mall_directory
   };
-  final _estabelecimentoPageController = PageController(initialPage: 0);
+  final PageController _estabelecimentoPageController =
+      PageController(initialPage: 0);
 
   _HomePageState() {
     appBar = HomeAppBar(controller);
@@ -71,7 +72,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           Text('Estabelicimentos proximos de:'),
           Observer(builder: (_) {
             return Text(
-              controller.enderecoModel?.endereco ?? '',
+              controller.enderecoSelecionado?.endereco ?? '',
               style: TextStyle(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             );
@@ -194,7 +195,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               controller.alterarPaginaSelecionada(pagina),
           children: [
             _buildEstabelicimentoLista(),
-            //_buildEstabelicimentoGrid(),
+            _buildEstabelicimentoGrid(),
           ],
         ))
       ],

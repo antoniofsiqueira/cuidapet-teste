@@ -19,7 +19,7 @@ abstract class _HomeControllerBase with Store {
   final FornecedorService _fornecedorService;
 
   @observable
-  EnderecoModel enderecoModel;
+  EnderecoModel enderecoSelecionado;
 
   @observable
   ObservableFuture<List<CategoriaModel>> categoriasFuture;
@@ -55,13 +55,13 @@ abstract class _HomeControllerBase with Store {
   @action
   void buscarEstabelecimentos() {
     estabelicimentosFuture = ObservableFuture(
-        _fornecedorService.buscarFornecedoresProximos(enderecoModel));
+        _fornecedorService.buscarFornecedoresProximos(enderecoSelecionado));
   }
 
   @action
   Future<void> recuperarEnderecoSelecionado() async {
     var prefs = await SharedPrefsRepository.instance;
-    enderecoModel = await prefs.enderecoSelecionado;
+    enderecoSelecionado = await prefs.enderecoSelecionado;
   }
 
   @action

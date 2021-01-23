@@ -17,6 +17,7 @@ class DetalhePage extends StatefulWidget {
 
 class _DetalhePageState extends ModularState<DetalhePage, DetalheController> {
   final EnderecoModel model;
+
   final appBar = AppBar(
     backgroundColor: Colors.white,
     elevation: 0,

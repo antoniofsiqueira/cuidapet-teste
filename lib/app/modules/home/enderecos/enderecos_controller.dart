@@ -24,13 +24,13 @@ abstract class _EnderecosControllerBase with Store {
   ObservableFuture<List<EnderecoModel>> enderecosFuture;
 
   Future<List<Prediction>> buscaEnderecos(String endereco) {
-    return _enderecoService.buscaEnderecoGooglePlaces(endereco);
+    return _enderecoService.buscarEnderecoGooglePlaces(endereco);
   }
 
   @action
   Future<void> enviarDetalhe(Prediction pred) async {
     var resultado =
-        await _enderecoService.buscaDetalheEnderecoGooglePlaces(pred.placeId);
+        await _enderecoService.buscarDetalheEnderecoGooglePlaces(pred.placeId);
     var detalhe = resultado.result;
     var enderecoModel = EnderecoModel(
         id: null,
