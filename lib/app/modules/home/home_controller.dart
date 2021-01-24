@@ -1,6 +1,7 @@
 import 'package:cuidape_curso/app/models/categoria_models.dart';
 import 'package:cuidape_curso/app/models/fornecedor_busca_model.dart';
 import 'package:cuidape_curso/app/services/fornecedor_service.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -17,6 +18,7 @@ abstract class _HomeControllerBase with Store {
   final EnderecoService _enderecoService;
   final CategoriaService _categoriaService;
   final FornecedorService _fornecedorService;
+  final TextEditingController filtroNomeController = TextEditingController();
 
   @observable
   EnderecoModel enderecoSelecionado;
@@ -29,6 +31,11 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   ObservableFuture<List<FornecedorBuscaModel>> estabelicimentosFuture;
+
+  List<FornecedorBuscaModel> estabelicimentosOriginais;
+
+  @observable
+  int categoriaSelecionada;
 
   _HomeControllerBase(
     this._enderecoService,
@@ -44,7 +51,7 @@ abstract class _HomeControllerBase with Store {
     await temEnderecoCadastrado();
     await recuperarEnderecoSelecionado();
     buscarCategorias();
-    buscarEstabelecimentos();
+    await buscarEstabelecimentos();
   }
 
   @action
@@ -53,9 +60,47 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
-  void buscarEstabelecimentos() {
+  Future<void> buscarEstabelecimentos() async {
+    categoriaSelecionada = null;
+    filtroNomeController.text = '';
     estabelicimentosFuture = ObservableFuture(
         _fornecedorService.buscarFornecedoresProximos(enderecoSelecionado));
+    estabelicimentosOriginais = await estabelicimentosFuture;
+  }
+
+  @action
+  void filtrarPorCategoria(int id) {
+    //var fornecedores = estabelicimentosOriginais;
+    if (categoriaSelecionada == id) {
+      categoriaSelecionada = null;
+    } else {
+      categoriaSelecionada = id;
+      _filtrarEstabelecimentos();
+    }
+  }
+
+  @action
+  void filtrarEstabelecimentoPorNome() {
+    _filtrarEstabelecimentos();
+  }
+
+  @action
+  void _filtrarEstabelecimentos() {
+    var fornecedores = estabelicimentosOriginais;
+    if (categoriaSelecionada != null) {
+      fornecedores = fornecedores
+          .where((e) => e.categoria.id == categoriaSelecionada)
+          .toList();
+    }
+
+    if (filtroNomeController.text.isNotEmpty) {
+      fornecedores = fornecedores
+          .where((e) => e.nome
+              .toLowerCase()
+              .contains(filtroNomeController.text.toLowerCase()))
+          .toList();
+    }
+    estabelicimentosFuture = ObservableFuture(Future.value(fornecedores));
   }
 
   @action

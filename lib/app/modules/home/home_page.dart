@@ -3,6 +3,7 @@ import 'package:cuidape_curso/app/models/fornecedor_busca_model.dart';
 import 'package:cuidape_curso/app/modules/home/components/estabelecimento_card.dart';
 import 'package:cuidape_curso/app/modules/home/components/estabelecimento_item_lista.dart';
 import 'package:cuidape_curso/app/modules/home/components/home_appbar.dart';
+import 'package:cuidape_curso/app/shared/theme_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -44,20 +45,24 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       drawer: Drawer(),
       backgroundColor: Colors.grey[100],
       appBar: appBar,
-      body: SingleChildScrollView(
-        child: Container(
-          width: ScreenUtil.screenWidthDp,
-          //height: 500,
-          height: ScreenUtil.screenHeightDp -
-              (appBar.preferredSize.height + ScreenUtil.statusBarHeight),
-          child: Column(
-            children: <Widget>[
-              _buildEndereco(),
-              _buildCategorias(),
-              Expanded(
-                child: _buildEstabelicimentos(),
-              ),
-            ],
+      body: RefreshIndicator(
+        onRefresh: () => controller.buscarEstabelecimentos(),
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Container(
+            width: ScreenUtil.screenWidthDp,
+            //height: 500,
+            height: ScreenUtil.screenHeightDp -
+                (appBar.preferredSize.height + ScreenUtil.statusBarHeight),
+            child: Column(
+              children: <Widget>[
+                _buildEndereco(),
+                _buildCategorias(),
+                Expanded(
+                  child: _buildEstabelicimentos(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -111,24 +116,34 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       itemCount: cats.length,
                       itemBuilder: (context, index) {
                         var cat = cats[index];
-                        return Container(
-                          margin: EdgeInsets.only(top: 10, right: 20, left: 20),
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.grey[300],
-                                child: Icon(
-                                  categoriasIcons[cat.tipo],
-                                  size: 30,
-                                  color: Colors.black,
+                        return InkWell(
+                          onTap: () => controller.filtrarPorCategoria(cat.id),
+                          child: Container(
+                            margin:
+                                EdgeInsets.only(top: 10, right: 20, left: 20),
+                            child: Column(
+                              children: [
+                                Observer(builder: (_) {
+                                  return CircleAvatar(
+                                    backgroundColor:
+                                        controller.categoriaSelecionada ==
+                                                cat.id
+                                            ? ThemeUtils.primaryColor
+                                            : ThemeUtils.primaryColorLight,
+                                    child: Icon(
+                                      categoriasIcons[cat.tipo],
+                                      size: 30,
+                                      color: Colors.black,
+                                    ),
+                                    radius: 30,
+                                  );
+                                }),
+                                SizedBox(
+                                  height: 10,
                                 ),
-                                radius: 30,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(cat.nome),
-                            ],
+                                Text(cat.nome),
+                              ],
+                            ),
                           ),
                         );
                       },

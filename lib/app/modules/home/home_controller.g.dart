@@ -75,11 +75,37 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$categoriaSelecionadaAtom =
+      Atom(name: '_HomeControllerBase.categoriaSelecionada');
+
+  @override
+  int get categoriaSelecionada {
+    _$categoriaSelecionadaAtom.reportRead();
+    return super.categoriaSelecionada;
+  }
+
+  @override
+  set categoriaSelecionada(int value) {
+    _$categoriaSelecionadaAtom.reportWrite(value, super.categoriaSelecionada,
+        () {
+      super.categoriaSelecionada = value;
+    });
+  }
+
   final _$initPageAsyncAction = AsyncAction('_HomeControllerBase.initPage');
 
   @override
   Future<void> initPage() {
     return _$initPageAsyncAction.run(() => super.initPage());
+  }
+
+  final _$buscarEstabelecimentosAsyncAction =
+      AsyncAction('_HomeControllerBase.buscarEstabelecimentos');
+
+  @override
+  Future<void> buscarEstabelecimentos() {
+    return _$buscarEstabelecimentosAsyncAction
+        .run(() => super.buscarEstabelecimentos());
   }
 
   final _$recuperarEnderecoSelecionadoAsyncAction =
@@ -126,11 +152,11 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
-  void buscarEstabelecimentos() {
+  void filtrarPorCategoria(int id) {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.buscarEstabelecimentos');
+        name: '_HomeControllerBase.filtrarPorCategoria');
     try {
-      return super.buscarEstabelecimentos();
+      return super.filtrarPorCategoria(id);
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -142,7 +168,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
 enderecoSelecionado: ${enderecoSelecionado},
 categoriasFuture: ${categoriasFuture},
 paginaSelecionada: ${paginaSelecionada},
-estabelicimentosFuture: ${estabelicimentosFuture}
+estabelicimentosFuture: ${estabelicimentosFuture},
+categoriaSelecionada: ${categoriaSelecionada}
     ''';
   }
 }
