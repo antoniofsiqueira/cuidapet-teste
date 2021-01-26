@@ -26,5 +26,6 @@ class FacebookRepository {
       default:
         return null;
     }
+    return null;
   }
 }

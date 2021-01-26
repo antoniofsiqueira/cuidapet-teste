@@ -113,7 +113,7 @@ abstract class _HomeControllerBase with Store {
   Future<void> temEnderecoCadastrado() async {
     var temEndereco = await _enderecoService.existeEnderecoCadastrado();
     if (!temEndereco) {
-      await Modular.link.pushNamed('/enderecos');
+      await Modular.to.pushNamed('/home/enderecos');
     }
   }
 }

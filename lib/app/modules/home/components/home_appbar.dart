@@ -26,7 +26,7 @@ class HomeAppBar extends PreferredSize {
               IconButton(
                   icon: Icon(Icons.location_on),
                   onPressed: () async {
-                    await Modular.link.pushNamed('/enderecos');
+                    await Modular.to.pushNamed('/home/enderecos');
                     await controller.recuperarEnderecoSelecionado();
                     await controller.buscarEstabelecimentos();
                   })

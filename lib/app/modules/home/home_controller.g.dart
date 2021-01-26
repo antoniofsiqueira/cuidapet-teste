@@ -163,6 +163,28 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  void filtrarEstabelecimentoPorNome() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.filtrarEstabelecimentoPorNome');
+    try {
+      return super.filtrarEstabelecimentoPorNome();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void _filtrarEstabelecimentos() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase._filtrarEstabelecimentos');
+    try {
+      return super._filtrarEstabelecimentos();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 enderecoSelecionado: ${enderecoSelecionado},
