@@ -39,7 +39,10 @@ class _EstabelecimentoPageState
           duration: Duration(milliseconds: 300),
           opacity: controller.servicoSelecionados.isNotEmpty ? 1 : 0,
           child: FloatingActionButton.extended(
-            onPressed: null,
+            onPressed: () => Modular.to.pushNamed('/agendamento', arguments: {
+              'estabelecimentoId': widget.estabelecimentoId,
+              'servicosSelecionados': controller.servicoSelecionados
+            }),
             label: Text('Fazer Agendamento'),
             icon: Icon(Icons.schedule),
             backgroundColor: ThemeUtils.primaryColor,

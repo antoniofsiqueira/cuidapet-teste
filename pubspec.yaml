@@ -30,6 +30,7 @@ dependencies:
   dio: ^3.0.9
   firebase_auth: ^0.16.1
   firebase_messaging: ^6.0.16
+  flutter_calendar_carousel: ^1.5.2
   flutter_dotenv: ^2.1.0
   flutter_facebook_login: ^3.0.0
   flutter_icons: ^1.1.0

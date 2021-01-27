@@ -25,6 +25,40 @@ mixin _$EstabelecimentoController on _EstabelecimentoControllerBase, Store {
     });
   }
 
+  final _$fornecedorServicoFutureAtom =
+      Atom(name: '_EstabelecimentoControllerBase.fornecedorServicoFuture');
+
+  @override
+  ObservableFuture<List<FornecedorServicoModel>> get fornecedorServicoFuture {
+    _$fornecedorServicoFutureAtom.reportRead();
+    return super.fornecedorServicoFuture;
+  }
+
+  @override
+  set fornecedorServicoFuture(
+      ObservableFuture<List<FornecedorServicoModel>> value) {
+    _$fornecedorServicoFutureAtom
+        .reportWrite(value, super.fornecedorServicoFuture, () {
+      super.fornecedorServicoFuture = value;
+    });
+  }
+
+  final _$servicoSelecionadosAtom =
+      Atom(name: '_EstabelecimentoControllerBase.servicoSelecionados');
+
+  @override
+  ObservableList<FornecedorServicoModel> get servicoSelecionados {
+    _$servicoSelecionadosAtom.reportRead();
+    return super.servicoSelecionados;
+  }
+
+  @override
+  set servicoSelecionados(ObservableList<FornecedorServicoModel> value) {
+    _$servicoSelecionadosAtom.reportWrite(value, super.servicoSelecionados, () {
+      super.servicoSelecionados = value;
+    });
+  }
+
   final _$_EstabelecimentoControllerBaseActionController =
       ActionController(name: '_EstabelecimentoControllerBase');
 
@@ -40,9 +74,23 @@ mixin _$EstabelecimentoController on _EstabelecimentoControllerBase, Store {
   }
 
   @override
+  void adicionarOuRemoverServico(FornecedorServicoModel servico) {
+    final _$actionInfo =
+        _$_EstabelecimentoControllerBaseActionController.startAction(
+            name: '_EstabelecimentoControllerBase.adicionarOuRemoverServico');
+    try {
+      return super.adicionarOuRemoverServico(servico);
+    } finally {
+      _$_EstabelecimentoControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-fornecedorFuture: ${fornecedorFuture}
+fornecedorFuture: ${fornecedorFuture},
+fornecedorServicoFuture: ${fornecedorServicoFuture},
+servicoSelecionados: ${servicoSelecionados}
     ''';
   }
 }

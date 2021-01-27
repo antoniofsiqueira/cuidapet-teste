@@ -1,4 +1,5 @@
 import 'package:cuidape_curso/app/modules/home/home_controller.dart';
+import 'package:cuidape_curso/app/repository/share_prefs_repository.dart';
 import 'package:cuidape_curso/app/shared/theme_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,12 +25,20 @@ class HomeAppBar extends PreferredSize {
             ),
             actions: [
               IconButton(
-                  icon: Icon(Icons.location_on),
-                  onPressed: () async {
-                    await Modular.to.pushNamed('/home/enderecos');
-                    await controller.recuperarEnderecoSelecionado();
-                    await controller.buscarEstabelecimentos();
-                  })
+                icon: Icon(Icons.location_on),
+                onPressed: () async {
+                  await Modular.to.pushNamed('/home/enderecos');
+                  await controller.recuperarEnderecoSelecionado();
+                  await controller.buscarEstabelecimentos();
+                },
+              ),
+              /*  IconButton(
+                icon: Icon(Icons.exit_to_app),
+                onPressed: () async {
+                  var prefs = await SharedPrefsRepository.instance;
+                  await prefs.logout();
+                },
+              ),*/
             ],
             elevation: 0,
             flexibleSpace: Stack(

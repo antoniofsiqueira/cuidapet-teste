@@ -11,6 +11,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:cuidape_curso/app/app_widget.dart';
 
+import 'modules/agendamento/agendamento_module.dart';
 import 'modules/estabelecimento/estabelecimento_module.dart';
 import 'modules/login/login_module.dart';
 import 'repository/fornecedor_repository.dart';
@@ -39,6 +40,7 @@ class AppModule extends MainModule {
         ModularRouter('/home', module: HomeModule()),
         ModularRouter('/login', module: LoginModule()),
         ModularRouter('/estabelecimento', module: EstabelecimentoModule()),
+        ModularRouter('/agendamento', module: AgendamentoModule()),
       ];
 
   @override
