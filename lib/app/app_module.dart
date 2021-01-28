@@ -14,7 +14,9 @@ import 'package:cuidape_curso/app/app_widget.dart';
 import 'modules/agendamento/agendamento_module.dart';
 import 'modules/estabelecimento/estabelecimento_module.dart';
 import 'modules/login/login_module.dart';
+import 'repository/agendamento_repository.dart';
 import 'repository/fornecedor_repository.dart';
+import 'services/agendamento_service.dart';
 import 'services/fornecedor_service.dart';
 
 class AppModule extends MainModule {
@@ -28,6 +30,8 @@ class AppModule extends MainModule {
         Bind((i) => EnderecoService(i.get())),
         Bind((i) => FornecedorRepository()),
         Bind((i) => FornecedorService(i.get())),
+        Bind((i) => AgendamentoRepository()),
+        Bind((i) => AgendamentoService(i.get())),
         Bind((i) => AuthStore()),
       ];
 

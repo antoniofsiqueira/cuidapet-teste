@@ -3,6 +3,7 @@ import 'package:cuidape_curso/app/shared/componnent/cuidapet_textformfield.dart'
 import 'package:cuidape_curso/app/shared/theme_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:intl/intl.dart';
@@ -40,28 +41,33 @@ class _AgendamentoPageState
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  CalendarCarousel(
-                    locale: 'pt_BR',
-                    headerTextStyle:
-                        TextStyle(color: ThemeUtils.primaryColor, fontSize: 25),
-                    iconColor: ThemeUtils.primaryColor,
-                    height: 420,
-                    customGridViewPhysics: NeverScrollableScrollPhysics(),
-                    selectedDateTime: DateTime.now(),
-                    onDayPressed: (day, _) {
-                      print(day);
-                    },
-                  ),
+                  Observer(builder: (_) {
+                    return CalendarCarousel(
+                      locale: 'pt_BR',
+                      headerTextStyle: TextStyle(
+                          color: ThemeUtils.primaryColor, fontSize: 25),
+                      iconColor: ThemeUtils.primaryColor,
+                      height: 420,
+                      customGridViewPhysics: NeverScrollableScrollPhysics(),
+                      selectedDateTime: controller.dataSelecionada,
+                      onDayPressed: (day, _) => controller.alterarData(day),
+                    );
+                  }),
                   FlatButton(
                     onPressed: () async {
                       var horario = await showTimePicker(
-                          context: context, initialTime: TimeOfDay.now());
+                          context: context,
+                          initialTime: controller.horarioSelecionado);
+                      controller.alterarHorario(horario);
                     },
                     textColor: ThemeUtils.primaryColor,
                     child: Column(
                       children: [
                         Text("Selecione o Horário"),
-                        Text("00:00"),
+                        Observer(builder: (_) {
+                          return Text(
+                              '${controller.horarioSelecionado.hour}:${controller.horarioSelecionado.minute}');
+                        }),
                       ],
                     ),
                   ),
@@ -102,13 +108,38 @@ class _AgendamentoPageState
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CuidapetTextFormField(label: 'Seu Nome'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CuidapetTextFormField(label: 'Nome do Pet'),
+                  Form(
+                    key: controller.formKey,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CuidapetTextFormField(
+                            label: 'Seu Nome',
+                            controller: controller.nomeController,
+                            validator: (String valor) {
+                              if (valor.isEmpty) {
+                                return 'Nome Obrigatório';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CuidapetTextFormField(
+                            label: 'Nome do Pet',
+                            controller: controller.petController,
+                            validator: (String valor) {
+                              if (valor.isEmpty) {
+                                return 'Nome do Pet Obrigatório';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(bottom: 20),
@@ -119,7 +150,8 @@ class _AgendamentoPageState
                       color: ThemeUtils.primaryColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
-                      onPressed: () {},
+                      onPressed: () => controller.salvarAgendamento(
+                          widget.estabelecimento, widget.servicos),
                       child: Text(
                         'Agendar',
                         style: TextStyle(

@@ -92,6 +92,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
             ),
             Observer(builder: (_) {
               return CuidapetTextFormField(
+                label: 'Teste',
                 controller: controller.senhaController,
                 obscureText: controller.obscureText,
                 suffixIcon: IconButton(

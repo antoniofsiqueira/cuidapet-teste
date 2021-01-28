@@ -1,5 +1,4 @@
 import 'package:cuidape_curso/app/modules/home/home_controller.dart';
-import 'package:cuidape_curso/app/repository/share_prefs_repository.dart';
 import 'package:cuidape_curso/app/shared/theme_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

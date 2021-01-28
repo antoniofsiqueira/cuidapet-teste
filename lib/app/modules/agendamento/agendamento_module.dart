@@ -5,7 +5,7 @@ import 'package:cuidape_curso/app/modules/agendamento/agendamento_page.dart';
 class AgendamentoModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => AgendamentoController()),
+        Bind((i) => AgendamentoController(i.get())),
       ];
 
   @override
