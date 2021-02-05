@@ -37,4 +37,10 @@ class UsuarioRepository {
     await CustomDio.instance
         .post('/login/cadastrar', data: {'email': email, 'senha': senha});
   }
+
+  Future<UsuarioModel> atualizarImagemPerfil(String urlImagem) {
+    return CustomDio.authInstance.put('/usuario/avatar', data: {
+      'url_avatar': urlImagem
+    }).then((res) => UsuarioModel.fromJson(res.data));
+  }
 }

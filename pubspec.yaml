@@ -30,6 +30,7 @@ dependencies:
   dio: ^3.0.9
   firebase_auth: ^0.16.1
   firebase_messaging: ^6.0.16
+  firebase_storage: ^3.1.6
   flutter_calendar_carousel: ^1.5.2
   flutter_dotenv: ^2.1.0
   flutter_facebook_login: ^3.0.0
@@ -43,6 +44,7 @@ dependencies:
   get: ^3.24.0
   google_maps_flutter: ^1.1.1
   google_maps_webservice: ^0.0.16
+  image_picker: ^0.6.7+22
   intl: ^0.16.1
   json_annotation: ^3.1.1
   mobx: ^1.2.1+4
