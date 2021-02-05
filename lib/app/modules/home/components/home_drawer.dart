@@ -70,6 +70,10 @@ class HomeDrawer extends Drawer {
                           title: Text('Chats'),
                         ),
                         ListTile(
+                          onTap: () async {
+                            final prefs = await SharedPrefsRepository.instance;
+                            await prefs.logout();
+                          },
                           leading: Icon(Icons.exit_to_app),
                           title: Text('Sair'),
                         ),
